@@ -55,6 +55,7 @@ body {
     justify-content: center;
     width: 100vw;
     height: 200px;
+    padding-top: 40px;
 }
 
 .form-container > div {
@@ -117,16 +118,17 @@ body {
 .task-container {
     position: relative;
     width: 100vw;
-    min-height: 430px;
+    height: 390px;
 }
 
 .task-container > .container {
     position: relative;
     padding: 20px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     width: 65.5vw;
-    height: 380px;
+    height: 250px;
     display: flex;
     flex-wrap: wrap;
     column-gap: 50px;
@@ -185,6 +187,8 @@ body {
     text-align: center;
     transform: translateX(-50%);
     color: #564F4F;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 .task-container > .container > .task > .task-time {
@@ -244,17 +248,18 @@ body {
 .footer-container {
     position: relative;
     width: 100vw;
-    height: 38px;
+    height: calc(100vh - 760px);
 }
 
 .footer-container > h3 {
-    position: relative;
+    position: absolute;
     width: max-content;
     font-size: 16px;
+    font-weight: 500;
     color: #000736;
+    bottom: 10px;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 }
 
 
