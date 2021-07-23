@@ -68,6 +68,7 @@ body {
 
 .form-container > div > label {
     height: max-content;
+    font-weight: 500;
 }
 
 .form-container > div > input {
