@@ -205,6 +205,13 @@ body {
     bottom: 5px;
     left: 40%;
     transform: translateX(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.task-container > .container > .task > .add-task:hover {
+    color: #4e4e4e;
+    transition: all 0.3s ease-in;
 }
 
 .task-container > .container > .task > .delete-task {
@@ -215,6 +222,13 @@ body {
     bottom: 5px;
     left: 60%;
     transform: translateX(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.task-container > .container > .task > .delete-task:hover {
+    color: #4e4e4e;
+    transition: all 0.3s ease-in;
 }
 
 
