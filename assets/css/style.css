@@ -26,8 +26,9 @@
 
 body {
     overflow-x: hidden;
-    background-color: #E5E5E5;
     font-family: 'Montserrat', sans-serif;
+    /*background-color: #E5E5E5;*/
+    background-image: linear-gradient(to right top, #e5e5e5, #dadada, #cecece, #c3c3c3, #b8b8b8, #afafaf, #a6a6a7, #9d9d9e, #939495, #898a8b, #7f8182, #757878);
 }
 
 /*Title styling*/
@@ -127,23 +128,25 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 65.5vw;
-    height: 250px;
+    /*width: 65.5vw;*/
+    width: 80vw;
+    height: 280px;
     display: flex;
     flex-wrap: wrap;
     column-gap: 50px;
-    row-gap: 20px;
+    row-gap: 30px;
     justify-content: center;
     overflow-y: auto;
 }
 
 .task-container > .container > .task {
     position: relative;
-    width: 220px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
     border-radius: 25px;
     background-color: white;
-    box-shadow: 2px 5px 6px 2px #d8d8d8;
+    /*box-shadow: 2px 5px 6px 2px #d8d8d8;*/
+    box-shadow: 2px 2px 6px 2px #a9a9a9;
     transition: all 0.3s ease-out;
 }
 
@@ -194,7 +197,7 @@ body {
 .task-container > .container > .task > .task-time {
     position: absolute;
     font-weight: 600;
-    top: 120px;
+    top: 140px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -204,7 +207,7 @@ body {
     width: max-content;
     font-size: 22px;
     font-weight: 600;
-    top: 160px;
+    top: 180px;
     left: 50%;
     transform: translateX(-50%);
 }
