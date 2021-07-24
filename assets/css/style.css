@@ -211,7 +211,7 @@ body {
     transform: translateX(-50%);
 }
 
-.task-container > .container > .task > .add-task {
+.task-container > .container > .task > .update-task {
     position: absolute;
     font-family: 'Material Icons', sans-serif;
     font-size: 24px;
@@ -223,7 +223,7 @@ body {
     transition: all 0.3s ease-out;
 }
 
-.task-container > .container > .task > .add-task:hover {
+.task-container > .container > .task > .update-task:hover {
     color: #4e4e4e;
     transition: all 0.3s ease-in;
 }
