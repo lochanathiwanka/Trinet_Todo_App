@@ -28,7 +28,7 @@ body {
     overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
     /*background-color: #E5E5E5;*/
-    background-image: linear-gradient(to right top, #e5e5e5, #dadada, #cecece, #c3c3c3, #b8b8b8, #afafaf, #a6a6a7, #9d9d9e, #939495, #898a8b, #7f8182, #757878);
+    background-image: linear-gradient(to right top, #e5e5e5, #e1e1e1, #dcdcdc, #d8d8d8, #d4d4d4);
 }
 
 /*Title styling*/
@@ -145,8 +145,7 @@ body {
     height: 280px;
     border-radius: 25px;
     background-color: white;
-    /*box-shadow: 2px 5px 6px 2px #d8d8d8;*/
-    box-shadow: 2px 2px 6px 2px #a9a9a9;
+    box-shadow: 2px 5px 6px 2px #d8d8d8;
     transition: all 0.3s ease-out;
 }
 
