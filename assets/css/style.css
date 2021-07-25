@@ -149,6 +149,10 @@ body {
     transition: all 0.3s ease-out;
 }
 
+.task-container > .container > .task > .id {
+    display: none;
+}
+
 .task-container > .container > .task:hover {
     transform: scale(1.1);
     transition: all 0.3s ease-in;
