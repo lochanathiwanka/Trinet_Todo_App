@@ -122,6 +122,16 @@ body {
     height: 390px;
 }
 
+.task-container > .button-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    gap: 40px;
+    top: 20px;
+}
+
 .task-container > .container {
     position: relative;
     padding: 20px;
