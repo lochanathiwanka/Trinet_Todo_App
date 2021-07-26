@@ -132,6 +132,19 @@ body {
     top: 20px;
 }
 
+.task-container > .button-container > span {
+    color: #747171;
+    cursor: pointer;
+}
+
+.task-container > .button-container > .current {
+    color: #1d1c1c;
+}
+
+.task-container > .button-container > span:hover {
+    color: #1d1c1c;
+}
+
 .task-container > .container {
     position: relative;
     padding: 20px;
@@ -157,6 +170,7 @@ body {
     background-color: white;
     box-shadow: 2px 5px 6px 2px #d8d8d8;
     transition: all 0.3s ease-out;
+    animation: popup 0.7s;
 }
 
 .task-container > .container > .task > .id {
@@ -325,6 +339,19 @@ body {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+
+@keyframes popup {
+    0% {
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 
