@@ -187,7 +187,9 @@ body {
 
 .task-container > .container > .task > .header > .topic-description {
     position: absolute;
-    width: max-content;
+    width: 90%;
+    height: 40px;
+    overflow-y: auto;
     bottom: 10px;
     left: 50%;
     text-align: center;
