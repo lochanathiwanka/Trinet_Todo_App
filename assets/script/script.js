@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    getAllTasks();
+    getAllUnFinishedTasks();
 });
 
 //add new task
@@ -55,11 +55,8 @@ function saveTask(dataObj) {
                     showConfirmButton: false,
                     timer: 1500
                 });
-
-                //empty container
-                $('#container').empty();
                 //get all tasks
-                getAllTasks();
+                getAllUnFinishedTasks();
                 //reset form fields
                 resetFormFields();
             })
@@ -73,8 +70,8 @@ function saveTask(dataObj) {
     })();
 }
 
-//get all tasks
-function getAllTasks() {
+//get all unfinished tasks
+function getAllUnFinishedTasks() {
     (async () => {
         await fetch('https://trinet-todo-app.herokuapp.com/get-all-tasks', {
             method: 'GET',
@@ -85,6 +82,9 @@ function getAllTasks() {
         })
             .then(response => response.json())
             .then(data => {
+                //empty container
+                $('#container').empty();
+
                 let taskList = data;
                 for (let i = 0; i < taskList.length; i++) {
                     let date = moment(taskList[i].date).format('YYYY-MM-DD');
@@ -129,10 +129,76 @@ function getAllTasks() {
                 });*/
 
                 /*$('.finished-button').prop( "checked", true );*/
-                isChecked();
+                finishTask();
             });
     })();
 }
+
+//get all finished tasks
+function getAllFinishedTasks() {
+    (async () => {
+        await fetch('https://trinet-todo-app.herokuapp.com/get-finished-tasks', {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                //empty container
+                $('#container').empty();
+
+                let taskList = data;
+                for (let i = 0; i < taskList.length; i++) {
+                    let date = moment(taskList[i].date).format('YYYY-MM-DD');
+
+                    $('#container').append(
+                        `
+                        <div class="task" id=task-${i}>
+                            <span class="id" id=id-${i}>${taskList[i]._id}</span>
+                            <div class="header" id=header-${i}>
+                                <div class="color-circle"></div>
+                                <h3 class="task-topic" id=task-topic-${i}>${taskList[i].title}</h3>
+                                <p class="topic-description" id=topic-description-${i}>
+                                    ${taskList[i].body}
+                                </p>
+                            </div>
+                            <span class="task-time" id=task-time-${i}>${taskList[i].time}</span>
+                            <span class="task-date" id=task-date-${i}>${date}</span>
+                            <label class="switch">
+                                <input type="checkbox" class="finished-button" id="finished-button-${i}">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="delete-task material-icons-outlined" id=delete-task-${i}>delete</span>
+                        </div>
+                        `
+                    );
+                }
+            })
+            .catch(error => {
+                Swal.fire(
+                    error,
+                    'Error',
+                    'error'
+                );
+            })
+            .finally(() => {
+                /*$('.finished-button').click(function(){
+                    if($(this).is(':checked')){
+                        console.log(true);
+                    } else {
+                        console.log(false);
+                    }
+                });*/
+
+                /*$('.finished-button').prop( "checked", true );*/
+                finishTask();
+            });
+    })();
+}
+
+//reset form fields
 function resetFormFields() {
     $('#date').val('');
     $('#time').val('');
@@ -182,7 +248,7 @@ $('#container').on('click', '.delete-task', function () {
 });
 
 //finish task
-function isChecked() {
+function finishTask() {
     $('.finished-button').click(function () {
         if ($(this).is(':checked')) {
 
@@ -206,6 +272,9 @@ function isChecked() {
                             showConfirmButton: false,
                             timer: 1500
                         });
+
+                        //get all unfinished tasks
+                        getAllUnFinishedTasks();
                     })
                     .catch(error => {
                         Swal.fire(
@@ -218,3 +287,19 @@ function isChecked() {
         }
     });
 }
+
+//current tasks load
+$('#current').click(function () {
+    $(this).css('color', '#1d1c1c');
+    $('#finished').css('color', '#747171');
+    getAllUnFinishedTasks();
+});
+
+//finished tasks load
+$('#finished').click(function () {
+    $(this).css('color', '#1d1c1c');
+    $('#current').css('color', '#747171');
+    getAllFinishedTasks();
+});
+
+
