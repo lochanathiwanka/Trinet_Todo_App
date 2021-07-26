@@ -1,7 +1,6 @@
 $(document).ready(() => {
     getAllTasks();
-    deleteTask();
-})
+});
 
 //add new task
 $('#btnAdd').click(function () {
@@ -119,6 +118,18 @@ function getAllTasks() {
                     'Error',
                     'error'
                 );
+            })
+            .finally(() => {
+                /*$('.finished-button').click(function(){
+                    if($(this).is(':checked')){
+                        console.log(true);
+                    } else {
+                        console.log(false);
+                    }
+                });*/
+
+                /*$('.finished-button').prop( "checked", true );*/
+                isChecked();
             });
     })();
 }
@@ -170,3 +181,44 @@ $('#container').on('click', '.delete-task', function () {
         });
     });
 });
+
+//finish task
+function isChecked() {
+    $('.finished-button').click(function () {
+        if ($(this).is(':checked')) {
+
+            let parent = $(this).parent().parent().attr('id');
+            let task_id = $(`#${parent}`).children('span').eq(0).text();
+
+            (async () => {
+                await fetch('https://trinet-todo-app.herokuapp.com/finish-task', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({id: task_id}),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your task has been finished',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            error,
+                            'Error',
+                            'error'
+                        );
+                    });
+            })();
+
+        } else {
+            console.log(false);
+        }
+    });
+}
