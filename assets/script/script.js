@@ -192,8 +192,8 @@ function getAllFinishedTasks() {
                     }
                 });*/
 
-                /*$('.finished-button').prop( "checked", true );*/
-                finishTask();
+                $('.finished-button').prop("checked", true);
+                unFinishTask();
             });
     })();
 }
@@ -275,6 +275,49 @@ function finishTask() {
 
                         //get all unfinished tasks
                         getAllUnFinishedTasks();
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            error,
+                            'Error',
+                            'error'
+                        );
+                    });
+            })();
+        }
+    });
+}
+
+//un finish task
+function unFinishTask() {
+
+    $('.finished-button').click(function () {
+
+        if (!$(this).is(':checked')) {
+
+            let parent = $(this).parent().parent().attr('id');
+            let task_id = $(`#${parent}`).children('span').eq(0).text();
+
+            (async () => {
+                await fetch('https://trinet-todo-app.herokuapp.com/undo-finish-task', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({id: task_id}),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your task set to Un Finished',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        //get all unfinished tasks
+                        getAllFinishedTasks();
                     })
                     .catch(error => {
                         Swal.fire(
