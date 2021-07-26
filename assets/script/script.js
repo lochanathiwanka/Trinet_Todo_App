@@ -29,7 +29,11 @@ $('#btnAdd').click(function () {
             "finished": false
         });
     } else {
-        alert('Fields cannot be empty!');
+        Swal.fire(
+            'Fields cannot be empty!!',
+            'Validate your fields',
+            'error'
+        );
     }
 });
 
@@ -45,6 +49,14 @@ function saveTask(dataObj) {
         })
             .then(response => response.json())
             .then(data => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your task has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
                 //empty container
                 $('#container').empty();
                 //get all tasks
@@ -53,7 +65,11 @@ function saveTask(dataObj) {
                 resetFormFields();
             })
             .catch(error => {
-                console.error(error);
+                Swal.fire(
+                    error,
+                    'Error',
+                    'error'
+                );
             });
     })();
 }
@@ -87,15 +103,23 @@ function getAllTasks() {
                             </div>
                             <span class="task-time" id=task-time-${i}>${taskList[i].time}</span>
                             <span class="task-date" id=task-date-${i}>${date}</span>
-                            <span class="update-task material-icons-outlined" id=update-task-${i}>refresh</span>
+                            <label class="switch">
+                                <input type="checkbox" class="finished-button" id="finished-button-${i}">
+                                <span class="slider round"></span>
+                            </label>
                             <span class="delete-task material-icons-outlined" id=delete-task-${i}>delete</span>
                         </div>
                         `
                     );
                 }
-                deleteTask();
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                Swal.fire(
+                    error,
+                    'Error',
+                    'error'
+                );
+            });
     })();
 }
 
@@ -107,27 +131,42 @@ function resetFormFields() {
 }
 
 //delete task
-function deleteTask() {
+$('#container').on('click', '.delete-task', function () {
     $('.delete-task').click(function () {
         let parent = $(this).parent().attr('id');
         let task_id = $(`#${parent}`).children('span').eq(0).text();
 
         //delete task from the db
-        (async () => {
-            await fetch('https://trinet-todo-app.herokuapp.com/delete-todo', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({id: task_id}),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Task deleted!');
-                    $(`#${parent}`).remove();
-                })
-                .catch(error => console.error(error));
-        })();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#279B1C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                (async () => {
+                    await fetch('https://trinet-todo-app.herokuapp.com/delete-todo', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({id: task_id}),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            $(`#${parent}`).remove();
+                            Swal.fire(
+                                'Task Deleted!',
+                                'Your task has been deleted.',
+                                'success'
+                            )
+                        })
+                        .catch(error => console.error(error));
+                })();
+            }
+        });
     });
-}
-
+});
