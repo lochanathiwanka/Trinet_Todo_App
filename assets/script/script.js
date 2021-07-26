@@ -133,7 +133,6 @@ function getAllTasks() {
             });
     })();
 }
-
 function resetFormFields() {
     $('#date').val('');
     $('#time').val('');
@@ -216,9 +215,6 @@ function isChecked() {
                         );
                     });
             })();
-
-        } else {
-            console.log(false);
         }
     });
 }
