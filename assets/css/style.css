@@ -34,7 +34,7 @@ body {
 .title-container {
     position: relative;
     width: 100vw;
-    height: 130px;
+    height: 100px;
     background-color: #000736;
 }
 
@@ -302,6 +302,8 @@ body {
     border-radius: 50%;
 }
 
+
+/*Delete task button styling*/
 .task-container > .container > .task > .delete-task {
     position: absolute;
     font-family: 'Material Icons', sans-serif;
@@ -381,9 +383,9 @@ body {
     }
 }
 
-@media all and (min-height: 798px) {
+@media all and (min-height: 770px) {
     .footer-container {
-        height: calc(100vh - 760px);
+        height: calc(100vh - 730px);
     }
 }
 
