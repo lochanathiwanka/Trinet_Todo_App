@@ -113,6 +113,7 @@ body {
     transition: all 0.2s ease-in;
 }
 
+
 /*Task container style*/
 .task-container {
     position: relative;
@@ -185,18 +186,6 @@ body {
     height: 140px;
     background-color: #50CA72;
     border-radius: 25px 25px 0 0;
-}
-
-.task-container > .container > .task > .header > .color-circle {
-    position: absolute;
-    display: none;
-    width: 13px;
-    height: 13px;
-    border-radius: 30px;
-    top: 15px;
-    left: 30%;
-    transform: translateX(-50%);
-    background-color: #F7FC08;
 }
 
 .task-container > .container > .task > .header > .task-topic {

@@ -1,3 +1,4 @@
+//fetch data
 $(document).ready(() => {
     getAllUnFinishedTasks();
 });
@@ -39,7 +40,7 @@ $('#btnAdd').click(function () {
 //save task
 function saveTask(dataObj) {
     (async () => {
-        fetch('https://trinet-todo-app.herokuapp.com/create', {
+        await fetch('https://trinet-todo-app.herokuapp.com/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,6 +56,7 @@ function saveTask(dataObj) {
                     showConfirmButton: false,
                     timer: 1500
                 });
+
                 //get all tasks
                 getAllUnFinishedTasks();
                 //reset form fields
@@ -94,7 +96,6 @@ function getAllUnFinishedTasks() {
                         <div class="task" id=task-${i}>
                             <span class="id" id=id-${i}>${taskList[i]._id}</span>
                             <div class="header" id=header-${i}>
-                                <div class="color-circle"></div>
                                 <h3 class="task-topic" id=task-topic-${i}>${taskList[i].title}</h3>
                                 <p class="topic-description" id=topic-description-${i}>
                                     ${taskList[i].body}
@@ -106,7 +107,7 @@ function getAllUnFinishedTasks() {
                                 <input type="checkbox" class="finished-button" id="finished-button-${i}">
                                 <span class="slider round"></span>
                             </label>
-                            <span class="delete-task material-icons-outlined" id=delete-task-${i}>delete</span>
+                            <span class="delete-task material-icons-outlined" id=delete-task-${i}>delete</span>                  
                         </div>
                         `
                     );
@@ -290,7 +291,6 @@ function finishTask() {
 
 //un finish task
 function unFinishTask() {
-
     $('.finished-button').click(function () {
 
         if (!$(this).is(':checked')) {
